@@ -16,13 +16,14 @@
  * @created 2015
  */
 package org.owasp.benchmark.helpers;
+import org.checkerframework.checker.tainting.qual.PolyTainted;
 
 public class Thing2 implements ThingInterface {
 
     @Override
-    public String doSomething(String i) {
+    public @PolyTainted String doSomething(@PolyTainted String i) {
         if (i == null) return "";
-        String r = new StringBuilder(i).toString();
+        @PolyTainted String r = new StringBuilder(i).toString();
         return r;
     }
 }

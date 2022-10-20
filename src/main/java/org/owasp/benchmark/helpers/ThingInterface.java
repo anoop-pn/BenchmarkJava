@@ -16,7 +16,8 @@
  * @created 2015
  */
 package org.owasp.benchmark.helpers;
+import org.checkerframework.checker.tainting.qual.PolyTainted;
 
 public interface ThingInterface {
-    public String doSomething(String i);
+    public @PolyTainted String doSomething(@PolyTainted String i);
 }

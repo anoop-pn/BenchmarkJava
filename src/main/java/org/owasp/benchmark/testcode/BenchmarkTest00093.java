@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00093")
 public class BenchmarkTest00093 extends HttpServlet {
@@ -80,7 +81,7 @@ public class BenchmarkTest00093 extends HttpServlet {
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("echo");
         }
 
-        String[] argsEnv = {"Foo=bar"};
+        @Untainted String[] argsEnv = {"Foo=bar"};
         Runtime r = Runtime.getRuntime();
 
         try {

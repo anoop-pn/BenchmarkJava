@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00559")
 public class BenchmarkTest00559 extends HttpServlet {
@@ -78,9 +79,9 @@ public class BenchmarkTest00559 extends HttpServlet {
         org.owasp.benchmark.helpers.ThingInterface thing =
                 org.owasp.benchmark.helpers.ThingFactory.createThing();
         String g39502 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-        String bar = thing.doSomething(g39502); // reflection
+        @Untainted String bar = thing.doSomething(g39502); // reflection
 
-        java.util.List<String> argList = new java.util.ArrayList<String>();
+        java.util.List<@Untainted String> argList = new java.util.ArrayList<@Untainted String>();
 
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {

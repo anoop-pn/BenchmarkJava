@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00158")
 public class BenchmarkTest00158 extends HttpServlet {
@@ -55,7 +56,7 @@ public class BenchmarkTest00158 extends HttpServlet {
         if ((7 * 42) - num > 200) bar = "This_should_always_happen";
         else bar = param;
 
-        java.util.List<String> argList = new java.util.ArrayList<String>();
+        java.util.List<@Untainted String> argList = new java.util.ArrayList<@Untainted String>();
 
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {
