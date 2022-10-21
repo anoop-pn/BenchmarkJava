@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-01/BenchmarkTest01606")
 public class BenchmarkTest01606 extends HttpServlet {
@@ -45,7 +46,7 @@ public class BenchmarkTest01606 extends HttpServlet {
         if (values != null && values.length > 0) param = values[0];
         else param = "";
 
-        String bar = new Test().doSomething(request, param);
+        @Untainted String bar = new Test().doSomething(request, param);
 
         String cmd = "";
         String osName = System.getProperty("os.name");
