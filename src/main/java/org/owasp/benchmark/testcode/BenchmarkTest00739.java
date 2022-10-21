@@ -56,7 +56,7 @@ public class BenchmarkTest00739 extends HttpServlet {
         String cmd = "";
         String a1 = "";
         String a2 = "";
-        String[] args = null;
+        @Untainted String[] args = null;
         String osName = System.getProperty("os.name");
 
         if (osName.indexOf("Windows") != -1) {

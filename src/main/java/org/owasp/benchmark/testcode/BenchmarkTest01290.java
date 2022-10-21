@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-01/BenchmarkTest01290")
 public class BenchmarkTest01290 extends HttpServlet {
@@ -43,13 +44,13 @@ public class BenchmarkTest01290 extends HttpServlet {
         String param = request.getParameter("BenchmarkTest01290");
         if (param == null) param = "";
 
-        String bar = new Test().doSomething(request, param);
+        @Untainted String bar = new Test().doSomething(request, param);
 
         String cmd =
                 org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(
                         this.getClass().getClassLoader());
 
-        String[] argsEnv = {bar};
+        @Untainted String[] argsEnv = {bar};
         Runtime r = Runtime.getRuntime();
 
         try {

@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-01/BenchmarkTest00897")
 public class BenchmarkTest00897 extends HttpServlet {
@@ -75,7 +76,7 @@ public class BenchmarkTest00897 extends HttpServlet {
             a1 = "sh";
             a2 = "-c";
         }
-        String[] args = {a1, a2, "echo " + bar};
+        @Untainted String[] args = {a1, a2, "echo " + bar};
 
         ProcessBuilder pb = new ProcessBuilder(args);
 
