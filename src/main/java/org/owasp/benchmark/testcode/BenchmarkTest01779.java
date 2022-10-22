@@ -75,12 +75,12 @@ public class BenchmarkTest01779 extends HttpServlet {
 
     private class Test {
 
-        public String doSomething(HttpServletRequest request, String param)
+        public @Untainted String doSomething(HttpServletRequest request, String param)
                 throws ServletException, IOException {
 
             String bar = "alsosafe";
             if (param != null) {
-                java.util.List<String> valuesList = new java.util.ArrayList<String>();
+                java.util.List<@Untainted String> valuesList = new java.util.ArrayList<@Untainted String>();
                 valuesList.add("safe");
                 valuesList.add(param);
                 valuesList.add("moresafe");

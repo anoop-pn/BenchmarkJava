@@ -93,7 +93,7 @@ public class BenchmarkTest01692 extends HttpServlet {
 
     private class Test {
 
-        public String doSomething(HttpServletRequest request, String param)
+        public @Untainted String doSomething(HttpServletRequest request, String param)
                 throws ServletException, IOException {
 
             // Chain a bunch of propagators in sequence
@@ -117,7 +117,7 @@ public class BenchmarkTest01692 extends HttpServlet {
             org.owasp.benchmark.helpers.ThingInterface thing =
                     org.owasp.benchmark.helpers.ThingFactory.createThing();
             String g28453 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-            String bar = thing.doSomething(g28453); // reflection
+            @Untainted String bar = thing.doSomething(g28453); // reflection
 
             return bar;
         }

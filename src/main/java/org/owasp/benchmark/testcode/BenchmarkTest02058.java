@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest02058")
 public class BenchmarkTest02058 extends HttpServlet {
@@ -50,9 +51,9 @@ public class BenchmarkTest02058 extends HttpServlet {
         // URL Decode the header value since req.getHeaders() doesn't. Unlike req.getParameters().
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        String bar = doSomething(request, param);
+        @Untainted String bar = doSomething(request, param);
 
-        java.util.List<String> argList = new java.util.ArrayList<String>();
+        java.util.List<@Untainted String> argList = new java.util.ArrayList<@Untainted String>();
 
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {

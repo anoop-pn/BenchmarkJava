@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest02252")
 public class BenchmarkTest02252 extends HttpServlet {
@@ -47,27 +48,27 @@ public class BenchmarkTest02252 extends HttpServlet {
             if (values != null) param = values[0];
         }
 
-        String bar = doSomething(request, param);
+        @Untainted String bar = doSomething(request, param);
 
         String cmd = "";
         String a1 = "";
         String a2 = "";
-        String[] args = null;
+        @Untainted String[] args = null;
         String osName = System.getProperty("os.name");
 
         if (osName.indexOf("Windows") != -1) {
             a1 = "cmd.exe";
             a2 = "/c";
             cmd = "echo ";
-            args = new String[] {a1, a2, cmd, bar};
+            args = new @Untainted String[] {a1, a2, cmd, bar};
         } else {
             a1 = "sh";
             a2 = "-c";
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("ls ");
-            args = new String[] {a1, a2, cmd + bar};
+            args = new @Untainted String[] {a1, a2, cmd + bar};
         }
 
-        String[] argsEnv = {"foo=bar"};
+        @Untainted String[] argsEnv = {"foo=bar"};
 
         Runtime r = Runtime.getRuntime();
 
