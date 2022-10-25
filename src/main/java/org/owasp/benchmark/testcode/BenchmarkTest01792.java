@@ -43,7 +43,7 @@ public class BenchmarkTest01792 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        String param = scr.getTheValue("BenchmarkTest01792");
+        @Untainted String param = scr.getTheValue("BenchmarkTest01792");
 
         @Untainted String bar = new Test().doSomething(request, param);
 
@@ -82,10 +82,10 @@ public class BenchmarkTest01792 extends HttpServlet {
 
     private class Test {
 
-        public String doSomething(HttpServletRequest request, String param)
+        public @Untainted String doSomething(HttpServletRequest request, @Untainted String param)
                 throws ServletException, IOException {
 
-            String bar = param;
+            @Untainted String bar = param;
 
             return bar;
         }

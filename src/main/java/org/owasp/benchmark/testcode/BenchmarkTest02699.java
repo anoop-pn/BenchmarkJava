@@ -43,7 +43,7 @@ public class BenchmarkTest02699 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        String param = scr.getTheValue("BenchmarkTest02699");
+        @Untainted String param = scr.getTheValue("BenchmarkTest02699");
 
         @Untainted String bar = doSomething(request, param);
 
@@ -71,10 +71,10 @@ public class BenchmarkTest02699 extends HttpServlet {
         }
     } // end doPost
 
-    private static String doSomething(HttpServletRequest request, String param)
+    private static @Untainted String doSomething(HttpServletRequest request, @Untainted String param)
             throws ServletException, IOException {
 
-        String bar;
+        @Untainted String bar;
 
         // Simple ? condition that assigns param to bar on false condition
         int num = 106;

@@ -46,8 +46,8 @@ public class BenchmarkTest00051 extends HttpServlet {
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
         String param = scr.getTheValue("BenchmarkTest00051");
 
-        @Untainted String a1 = "";
-        @Untainted String a2 = "";
+        String a1 = "";
+        String a2 = "";
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {
             a1 = "cmd.exe";

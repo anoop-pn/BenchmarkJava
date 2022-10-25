@@ -41,7 +41,7 @@ public class BenchmarkTest00158 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String param = "";
+        @Untainted String param = "";
         if (request.getHeader("BenchmarkTest00158") != null) {
             param = request.getHeader("BenchmarkTest00158");
         }
@@ -49,7 +49,7 @@ public class BenchmarkTest00158 extends HttpServlet {
         // URL Decode the header value since req.getHeader() doesn't. Unlike req.getParameter().
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        String bar;
+        @Untainted String bar;
 
         // Simple if statement that assigns constant to bar on true condition
         int num = 86;

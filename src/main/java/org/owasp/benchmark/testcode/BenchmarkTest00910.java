@@ -43,9 +43,9 @@ public class BenchmarkTest00910 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        String param = scr.getTheValue("BenchmarkTest00910");
+        @Untainted String param = scr.getTheValue("BenchmarkTest00910");
 
-        String bar;
+        @Untainted String bar;
 
         // Simple ? condition that assigns constant to bar on true condition
         int num = 106;

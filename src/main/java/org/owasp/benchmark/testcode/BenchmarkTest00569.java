@@ -79,9 +79,9 @@ public class BenchmarkTest00569 extends HttpServlet {
         org.owasp.benchmark.helpers.ThingInterface thing =
                 org.owasp.benchmark.helpers.ThingFactory.createThing();
         String g6821 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-        String bar = thing.doSomething(g6821); // reflection
+        @Untainted String bar = thing.doSomething(g6821); // reflection
 
-        String cmd = "";
+        @Untainted String cmd = "";
         String a1 = "";
         String a2 = "";
         @Untainted String[] args = null;

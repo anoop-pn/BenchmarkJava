@@ -1,0 +1,6 @@
+{
+    "java.addExports": [
+        "/usr/bin/java"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
