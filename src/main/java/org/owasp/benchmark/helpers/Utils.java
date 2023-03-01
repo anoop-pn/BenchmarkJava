@@ -56,7 +56,6 @@ import org.apache.hc.client5.http.ssl.TrustSelfSignedStrategy;
 import org.apache.hc.core5.ssl.SSLContexts;
 import org.owasp.benchmark.service.pojo.XMLMessage;
 import org.owasp.esapi.ESAPI;
-import org.checkerframework.checker.tainting.qual.PolyTainted;
 
 public class Utils {
 
@@ -173,9 +172,9 @@ public class Utils {
         return param;
     }
 
-    public static @PolyTainted String getOSCommandString(String append) {
+    public static String getOSCommandString(String append) {
 
-        @PolyTainted String command = null;
+        String command = null;
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {
             command = "cmd.exe /c " + append + " ";
