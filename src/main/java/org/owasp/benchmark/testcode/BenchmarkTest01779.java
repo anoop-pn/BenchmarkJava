@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest01779")
 public class BenchmarkTest01779 extends HttpServlet {
@@ -45,7 +45,7 @@ public class BenchmarkTest01779 extends HttpServlet {
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
         String param = scr.getTheValue("BenchmarkTest01779");
 
-        @Untainted String bar = new Test().doSomething(request, param);
+        @RUntainted String bar = new Test().doSomething(request, param);
 
         String a1 = "";
         String a2 = "";
@@ -57,7 +57,7 @@ public class BenchmarkTest01779 extends HttpServlet {
             a1 = "sh";
             a2 = "-c";
         }
-        @Untainted String[] args = {a1, a2, "echo " + bar};
+        @RUntainted String[] args = {a1, a2, "echo " + bar};
 
         ProcessBuilder pb = new ProcessBuilder();
 
@@ -75,12 +75,13 @@ public class BenchmarkTest01779 extends HttpServlet {
 
     private class Test {
 
-        public @Untainted String doSomething(HttpServletRequest request, String param)
+        public @RUntainted String doSomething(HttpServletRequest request, String param)
                 throws ServletException, IOException {
 
             String bar = "alsosafe";
             if (param != null) {
-                java.util.List<@Untainted String> valuesList = new java.util.ArrayList<@Untainted String>();
+                java.util.List<@RUntainted String> valuesList =
+                        new java.util.ArrayList<@RUntainted String>();
                 valuesList.add("safe");
                 valuesList.add(param);
                 valuesList.add("moresafe");

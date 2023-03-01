@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-03/BenchmarkTest02699")
 public class BenchmarkTest02699 extends HttpServlet {
@@ -43,9 +43,9 @@ public class BenchmarkTest02699 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        @Untainted String param = scr.getTheValue("BenchmarkTest02699");
+        @RUntainted String param = scr.getTheValue("BenchmarkTest02699");
 
-        @Untainted String bar = doSomething(request, param);
+        @RUntainted String bar = doSomething(request, param);
 
         String a1 = "";
         String a2 = "";
@@ -57,7 +57,7 @@ public class BenchmarkTest02699 extends HttpServlet {
             a1 = "sh";
             a2 = "-c";
         }
-        @Untainted String[] args = {a1, a2, "echo " + bar};
+        @RUntainted String[] args = {a1, a2, "echo " + bar};
 
         ProcessBuilder pb = new ProcessBuilder(args);
 
@@ -71,10 +71,11 @@ public class BenchmarkTest02699 extends HttpServlet {
         }
     } // end doPost
 
-    private static @Untainted String doSomething(HttpServletRequest request, @Untainted String param)
+    private static @RUntainted String doSomething(
+            HttpServletRequest request, @RUntainted String param)
             throws ServletException, IOException {
 
-        @Untainted String bar;
+        @RUntainted String bar;
 
         // Simple ? condition that assigns param to bar on false condition
         int num = 106;

@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00090")
 public class BenchmarkTest00090 extends HttpServlet {
@@ -53,7 +53,7 @@ public class BenchmarkTest00090 extends HttpServlet {
 
         javax.servlet.http.Cookie[] theCookies = request.getCookies();
 
-        @Untainted String param = "noCookieValueSupplied";
+        @RUntainted String param = "noCookieValueSupplied";
         if (theCookies != null) {
             for (javax.servlet.http.Cookie theCookie : theCookies) {
                 if (theCookie.getName().equals("BenchmarkTest00090")) {
@@ -63,14 +63,14 @@ public class BenchmarkTest00090 extends HttpServlet {
             }
         }
 
-        @Untainted String bar;
+        @RUntainted String bar;
 
         // Simple if statement that assigns constant to bar on true condition
         int num = 86;
         if ((7 * 42) - num > 200) bar = "This_should_always_happen";
         else bar = param;
 
-        @Untainted String cmd = "";
+        @RUntainted String cmd = "";
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("echo");

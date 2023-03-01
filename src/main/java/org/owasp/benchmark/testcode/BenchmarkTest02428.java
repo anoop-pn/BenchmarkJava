@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest02428")
 public class BenchmarkTest02428 extends HttpServlet {
@@ -46,7 +46,7 @@ public class BenchmarkTest02428 extends HttpServlet {
         String param = scr.getTheParameter("BenchmarkTest02428");
         if (param == null) param = "";
 
-        @Untainted String bar = doSomething(request, param);
+        @RUntainted String bar = doSomething(request, param);
 
         String cmd = "";
         String osName = System.getProperty("os.name");

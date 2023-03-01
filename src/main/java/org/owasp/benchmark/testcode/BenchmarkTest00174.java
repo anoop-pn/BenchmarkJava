@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00174")
 public class BenchmarkTest00174 extends HttpServlet {
@@ -51,13 +51,14 @@ public class BenchmarkTest00174 extends HttpServlet {
 
         org.owasp.benchmark.helpers.ThingInterface thing =
                 org.owasp.benchmark.helpers.ThingFactory.createThing();
-        @Untainted String bar = thing.doSomething(param);
+        @RUntainted String bar = thing.doSomething(param);
 
-        @Untainted String cmd =
+        @RUntainted
+        String cmd =
                 org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(
                         this.getClass().getClassLoader());
 
-        @Untainted String[] argsEnv = {bar};
+        @RUntainted String[] argsEnv = {bar};
         Runtime r = Runtime.getRuntime();
 
         try {

@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00559")
 public class BenchmarkTest00559 extends HttpServlet {
@@ -79,9 +79,9 @@ public class BenchmarkTest00559 extends HttpServlet {
         org.owasp.benchmark.helpers.ThingInterface thing =
                 org.owasp.benchmark.helpers.ThingFactory.createThing();
         String g39502 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-        @Untainted String bar = thing.doSomething(g39502); // reflection
+        @RUntainted String bar = thing.doSomething(g39502); // reflection
 
-        java.util.List<@Untainted String> argList = new java.util.ArrayList<@Untainted String>();
+        java.util.List<@RUntainted String> argList = new java.util.ArrayList<@RUntainted String>();
 
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {

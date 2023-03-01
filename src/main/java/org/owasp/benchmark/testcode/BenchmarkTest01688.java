@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-01/BenchmarkTest01688")
 public class BenchmarkTest01688 extends HttpServlet {
@@ -68,7 +68,7 @@ public class BenchmarkTest01688 extends HttpServlet {
         }
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        @Untainted String bar = new Test().doSomething(request, param);
+        @RUntainted String bar = new Test().doSomething(request, param);
 
         String cmd = "";
         String osName = System.getProperty("os.name");
@@ -76,7 +76,7 @@ public class BenchmarkTest01688 extends HttpServlet {
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("echo");
         }
 
-        @Untainted String[] argsEnv = {"Foo=bar"};
+        @RUntainted String[] argsEnv = {"Foo=bar"};
         Runtime r = Runtime.getRuntime();
 
         try {

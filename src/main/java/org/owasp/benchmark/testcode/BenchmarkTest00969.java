@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-01/BenchmarkTest00969")
 public class BenchmarkTest00969 extends HttpServlet {
@@ -63,9 +63,9 @@ public class BenchmarkTest00969 extends HttpServlet {
             }
         }
 
-        @Untainted String bar = new Test().doSomething(request, param);
+        @RUntainted String bar = new Test().doSomething(request, param);
 
-        java.util.List<@Untainted String> argList = new java.util.ArrayList<@Untainted String>();
+        java.util.List<@RUntainted String> argList = new java.util.ArrayList<@RUntainted String>();
 
         String osName = System.getProperty("os.name");
         if (osName.indexOf("Windows") != -1) {
@@ -91,7 +91,7 @@ public class BenchmarkTest00969 extends HttpServlet {
 
     private class Test {
 
-        public @Untainted String doSomething(HttpServletRequest request, String param)
+        public @RUntainted String doSomething(HttpServletRequest request, String param)
                 throws ServletException, IOException {
 
             // Chain a bunch of propagators in sequence
@@ -115,7 +115,7 @@ public class BenchmarkTest00969 extends HttpServlet {
             org.owasp.benchmark.helpers.ThingInterface thing =
                     org.owasp.benchmark.helpers.ThingFactory.createThing();
             String g10263 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-            @Untainted String bar = thing.doSomething(g10263); // reflection
+            @RUntainted String bar = thing.doSomething(g10263); // reflection
 
             return bar;
         }

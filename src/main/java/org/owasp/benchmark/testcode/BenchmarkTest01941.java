@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest01941")
 public class BenchmarkTest01941 extends HttpServlet {
@@ -49,13 +49,13 @@ public class BenchmarkTest01941 extends HttpServlet {
         // URL Decode the header value since req.getHeader() doesn't. Unlike req.getParameter().
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        @Untainted String bar = doSomething(request, param);
+        @RUntainted String bar = doSomething(request, param);
 
         String cmd =
                 org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(
                         this.getClass().getClassLoader());
 
-        @Untainted String[] argsEnv = {bar};
+        @RUntainted String[] argsEnv = {bar};
         Runtime r = Runtime.getRuntime();
 
         try {
@@ -69,7 +69,7 @@ public class BenchmarkTest01941 extends HttpServlet {
         }
     } // end doPost
 
-    private static @Untainted String doSomething(HttpServletRequest request, String param)
+    private static @RUntainted String doSomething(HttpServletRequest request, String param)
             throws ServletException, IOException {
 
         // Chain a bunch of propagators in sequence
@@ -93,7 +93,7 @@ public class BenchmarkTest01941 extends HttpServlet {
         org.owasp.benchmark.helpers.ThingInterface thing =
                 org.owasp.benchmark.helpers.ThingFactory.createThing();
         String g20426 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-        @Untainted String bar = thing.doSomething(g20426); // reflection
+        @RUntainted String bar = thing.doSomething(g20426); // reflection
 
         return bar;
     }

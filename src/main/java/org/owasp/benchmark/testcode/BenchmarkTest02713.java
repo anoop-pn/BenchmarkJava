@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-03/BenchmarkTest02713")
 public class BenchmarkTest02713 extends HttpServlet {
@@ -43,15 +43,15 @@ public class BenchmarkTest02713 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        @Untainted String param = scr.getTheValue("BenchmarkTest02713");
+        @RUntainted String param = scr.getTheValue("BenchmarkTest02713");
 
-        @Untainted String bar = doSomething(request, param);
+        @RUntainted String bar = doSomething(request, param);
 
         String cmd =
                 org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(
                         this.getClass().getClassLoader());
-        @Untainted String[] args = {cmd};
-        @Untainted String[] argsEnv = {bar};
+        @RUntainted String[] args = {cmd};
+        @RUntainted String[] argsEnv = {bar};
 
         Runtime r = Runtime.getRuntime();
 
@@ -66,10 +66,11 @@ public class BenchmarkTest02713 extends HttpServlet {
         }
     } // end doPost
 
-    private static @Untainted String doSomething(HttpServletRequest request, @Untainted String param)
+    private static @RUntainted String doSomething(
+            HttpServletRequest request, @RUntainted String param)
             throws ServletException, IOException {
 
-        @Untainted String bar;
+        @RUntainted String bar;
         String guess = "ABC";
         char switchTarget = guess.charAt(1); // condition 'B', which is safe
 

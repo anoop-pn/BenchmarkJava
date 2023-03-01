@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest01692")
 public class BenchmarkTest01692 extends HttpServlet {
@@ -68,7 +68,7 @@ public class BenchmarkTest01692 extends HttpServlet {
         }
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        @Untainted String bar = new Test().doSomething(request, param);
+        @RUntainted String bar = new Test().doSomething(request, param);
 
         String cmd = "";
         String osName = System.getProperty("os.name");
@@ -76,7 +76,7 @@ public class BenchmarkTest01692 extends HttpServlet {
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("echo");
         }
 
-        @Untainted String[] argsEnv = {"Foo=bar"};
+        @RUntainted String[] argsEnv = {"Foo=bar"};
         Runtime r = Runtime.getRuntime();
 
         try {
@@ -93,7 +93,7 @@ public class BenchmarkTest01692 extends HttpServlet {
 
     private class Test {
 
-        public @Untainted String doSomething(HttpServletRequest request, String param)
+        public @RUntainted String doSomething(HttpServletRequest request, String param)
                 throws ServletException, IOException {
 
             // Chain a bunch of propagators in sequence
@@ -117,7 +117,7 @@ public class BenchmarkTest01692 extends HttpServlet {
             org.owasp.benchmark.helpers.ThingInterface thing =
                     org.owasp.benchmark.helpers.ThingFactory.createThing();
             String g28453 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-            @Untainted String bar = thing.doSomething(g28453); // reflection
+            @RUntainted String bar = thing.doSomething(g28453); // reflection
 
             return bar;
         }

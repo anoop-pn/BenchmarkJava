@@ -17,9 +17,9 @@
  */
 package org.owasp.benchmark.helpers;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 public class SeparateClassRequest {
     private HttpServletRequest request;
@@ -50,7 +50,7 @@ public class SeparateClassRequest {
     }
 
     // This method is a 'safe' source.
-    public @Untainted String getTheValue(String p) {
+    public @RUntainted String getTheValue(String p) {
         return "bar";
     }
 }

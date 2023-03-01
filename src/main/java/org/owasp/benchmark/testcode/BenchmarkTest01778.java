@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest01778")
 public class BenchmarkTest01778 extends HttpServlet {
@@ -43,9 +43,9 @@ public class BenchmarkTest01778 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        @Untainted String param = scr.getTheValue("BenchmarkTest01778");
+        @RUntainted String param = scr.getTheValue("BenchmarkTest01778");
 
-        @Untainted String bar = new Test().doSomething(request, param);
+        @RUntainted String bar = new Test().doSomething(request, param);
 
         String a1 = "";
         String a2 = "";
@@ -57,7 +57,7 @@ public class BenchmarkTest01778 extends HttpServlet {
             a1 = "sh";
             a2 = "-c";
         }
-        @Untainted String[] args = {a1, a2, "echo " + bar};
+        @RUntainted String[] args = {a1, a2, "echo " + bar};
 
         ProcessBuilder pb = new ProcessBuilder();
 
@@ -75,12 +75,12 @@ public class BenchmarkTest01778 extends HttpServlet {
 
     private class Test {
 
-        public @Untainted String doSomething(HttpServletRequest request, @Untainted String param)
+        public @RUntainted String doSomething(HttpServletRequest request, @RUntainted String param)
                 throws ServletException, IOException {
 
             org.owasp.benchmark.helpers.ThingInterface thing =
                     org.owasp.benchmark.helpers.ThingFactory.createThing();
-            @Untainted String bar = thing.doSomething(param);
+            @RUntainted String bar = thing.doSomething(param);
 
             return bar;
         }

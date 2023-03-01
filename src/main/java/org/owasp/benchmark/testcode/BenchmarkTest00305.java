@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-00/BenchmarkTest00305")
 public class BenchmarkTest00305 extends HttpServlet {
@@ -77,22 +77,22 @@ public class BenchmarkTest00305 extends HttpServlet {
         String cmd = "";
         String a1 = "";
         String a2 = "";
-        @Untainted String[] args = null;
+        @RUntainted String[] args = null;
         String osName = System.getProperty("os.name");
 
         if (osName.indexOf("Windows") != -1) {
             a1 = "cmd.exe";
             a2 = "/c";
             cmd = "echo ";
-            args = new @Untainted String[] {a1, a2, cmd, bar};
+            args = new @RUntainted String[] {a1, a2, cmd, bar};
         } else {
             a1 = "sh";
             a2 = "-c";
             cmd = org.owasp.benchmark.helpers.Utils.getOSCommandString("ls ");
-            args = new @Untainted String[] {a1, a2, cmd + bar};
+            args = new @RUntainted String[] {a1, a2, cmd + bar};
         }
 
-        @Untainted String[] argsEnv = {"foo=bar"};
+        @RUntainted String[] argsEnv = {"foo=bar"};
 
         Runtime r = Runtime.getRuntime();
 

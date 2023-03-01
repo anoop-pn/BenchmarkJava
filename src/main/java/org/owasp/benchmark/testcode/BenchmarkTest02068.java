@@ -17,13 +17,13 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.checkerframework.checker.tainting.qual.Untainted;
 
 @WebServlet(value = "/cmdi-02/BenchmarkTest02068")
 public class BenchmarkTest02068 extends HttpServlet {
@@ -51,13 +51,13 @@ public class BenchmarkTest02068 extends HttpServlet {
         // URL Decode the header value since req.getHeaders() doesn't. Unlike req.getParameters().
         param = java.net.URLDecoder.decode(param, "UTF-8");
 
-        @Untainted String bar = doSomething(request, param);
+        @RUntainted String bar = doSomething(request, param);
 
         String cmd =
                 org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(
                         this.getClass().getClassLoader());
-        @Untainted String[] args = {cmd};
-        @Untainted String[] argsEnv = {bar};
+        @RUntainted String[] args = {cmd};
+        @RUntainted String[] argsEnv = {bar};
 
         Runtime r = Runtime.getRuntime();
 
