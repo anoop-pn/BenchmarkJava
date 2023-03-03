@@ -17,10 +17,12 @@
  */
 package org.owasp.benchmark.helpers;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+
 public class Thing2 implements ThingInterface {
 
     @Override
-    public String doSomething(String i) {
+    public @RPolyTainted String doSomething(@RPolyTainted String i) {
         if (i == null) return "";
         String r = new StringBuilder(i).toString();
         return r;

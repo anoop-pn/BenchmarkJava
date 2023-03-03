@@ -17,6 +17,8 @@
  */
 package org.owasp.benchmark.helpers;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+
 public interface ThingInterface {
-    public String doSomething(String i);
+    public @RPolyTainted String doSomething(@RPolyTainted String i);
 }

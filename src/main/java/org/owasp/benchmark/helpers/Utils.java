@@ -17,6 +17,7 @@
  */
 package org.owasp.benchmark.helpers;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -172,7 +173,7 @@ public class Utils {
         return param;
     }
 
-    public static String getOSCommandString(String append) {
+    public static @RPolyTainted String getOSCommandString(@RPolyTainted String append) {
 
         String command = null;
         String osName = System.getProperty("os.name");
