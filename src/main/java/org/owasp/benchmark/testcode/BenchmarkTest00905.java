@@ -43,9 +43,9 @@ public class BenchmarkTest00905 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        @RUntainted String param = scr.getTheValue("BenchmarkTest00905");
+        String param = scr.getTheValue("BenchmarkTest00905");
 
-        @RUntainted String bar = param;
+        String bar = param;
 
         String cmd = "";
         String a1 = "";

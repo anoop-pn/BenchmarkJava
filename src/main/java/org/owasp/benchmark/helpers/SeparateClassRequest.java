@@ -17,7 +17,7 @@
  */
 package org.owasp.benchmark.helpers;
 
-import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,7 +50,7 @@ public class SeparateClassRequest {
     }
 
     // This method is a 'safe' source.
-    public @RUntainted String getTheValue(String p) {
+    public @RPolyTainted String getTheValue(@RPolyTainted String p) {
         return "bar";
     }
 }

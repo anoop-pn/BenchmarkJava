@@ -17,6 +17,7 @@
  */
 package org.owasp.benchmark.testcode;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -43,9 +44,9 @@ public class BenchmarkTest02699 extends HttpServlet {
 
         org.owasp.benchmark.helpers.SeparateClassRequest scr =
                 new org.owasp.benchmark.helpers.SeparateClassRequest(request);
-        @RUntainted String param = scr.getTheValue("BenchmarkTest02699");
+        String param = scr.getTheValue("BenchmarkTest02699");
 
-        @RUntainted String bar = doSomething(request, param);
+        String bar = doSomething(request, param);
 
         String a1 = "";
         String a2 = "";
@@ -71,11 +72,11 @@ public class BenchmarkTest02699 extends HttpServlet {
         }
     } // end doPost
 
-    private static @RUntainted String doSomething(
-            HttpServletRequest request, @RUntainted String param)
+    private static @RPolyTainted String doSomething(
+            HttpServletRequest request, @RPolyTainted String param)
             throws ServletException, IOException {
 
-        @RUntainted String bar;
+        String bar;
 
         // Simple ? condition that assigns param to bar on false condition
         int num = 106;

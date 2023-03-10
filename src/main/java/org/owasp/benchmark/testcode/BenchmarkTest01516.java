@@ -46,7 +46,7 @@ public class BenchmarkTest01516 extends HttpServlet {
         String param = scr.getTheParameter("BenchmarkTest01516");
         if (param == null) param = "";
 
-        @RUntainted String bar = new Test().doSomething(request, param);
+        String bar = new Test().doSomething(request, param);
 
         String a1 = "";
         String a2 = "";
@@ -100,7 +100,7 @@ public class BenchmarkTest01516 extends HttpServlet {
             org.owasp.benchmark.helpers.ThingInterface thing =
                     org.owasp.benchmark.helpers.ThingFactory.createThing();
             String g84214 = "barbarians_at_the_gate"; // This is static so this whole flow is 'safe'
-            @RUntainted String bar = thing.doSomething(g84214); // reflection
+            String bar = thing.doSomething(g84214); // reflection
 
             return bar;
         }
